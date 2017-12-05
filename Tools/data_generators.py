@@ -1,27 +1,28 @@
-import mimesis
 import requests
-from frames import models
+from Main.frames import models
+from mimesis import Generic
+generic = Generic('en')
 
 
 def create_groups():
-    authorization = "Bearer" + models.user1.token
-    for _ in range(30):
-        payload = {"name": mimesis.Text.words(quantity=1), "description": mimesis.Text.text(quantity=2)}
-        requests.put(url="http://metknow.dev.cleveroad.com/api/Group/CreateGroup", headers=authorization, data=payload)
+    auth = {"Authorization": "Bearer " + models.user1.token}
+    payload = {"name": generic.text.word(), "description": generic.text.text(quantity=1)}
+    requests.put(url="http://metknow.dev.cleveroad.com/api/Group/CreateGroup", headers=auth, data=payload)
 
 
 def create_members_in_group():
-    authorization = "Bearer" + models.user1.token
+    auth = {"Authorization": "Bearer " + models.user1.token}
     for _ in range(60):
         payload = {
-            "firstName": mimesis.Personal.name,
-            "lastName": mimesis.Personal.surname,
-            "email": mimesis.Personal.email,
-            "phone": mimesis.Personal.telephone,
-            "gender": mimesis.Personal.gender,
-            "city": mimesis.Address.city,
-            "company": mimesis.Business.company,
-            "whereWeMet": mimesis.Text.text(quantity=1),
+            "firstName": generic.personal.name(),
+            "lastName": generic.personal.surname(),
+            "email": generic.personal.email(),
+            "phone": generic.personal.telephone(),
+            "gender": generic.personal.gender(),
+            "city": generic.address.city(),
+            "company": generic.business.company(),
+            "whereWeMet": generic.text.text(quantity=1),
         }
-        requests.put(url="http://metknow.dev.cleveroad.com/api/Member/30/CreateMember", headers=authorization,
+        requests.put(url="http://metknow.dev.cleveroad.com/api/Member/30/CreateMember", headers=auth,
                      data=payload)
+
