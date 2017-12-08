@@ -1,9 +1,12 @@
 import requests
+import json
 
 
 def get_token(role):
+    header = {"Content-Type": "application/json"}
     payload = {"email": role.email, "password": role.password}
-    r = requests.post(url="http://metknow.dev.cleveroad.com/api/Account/Login", params=payload)
+    r = requests.post(url="http://metknow.dev.cleveroad.com/api/Account/Login", headers=header,
+                      data=json.dumps(payload))
     return r.json()["data"]["token"]["accessToken"]
 
 
@@ -15,4 +18,4 @@ class User(object):
         self.token = get_token(self)
 
 
-user1 = User("test@gmail.com", "qwerty")
+user1 = User("test3@gmail.com", "qwerty")
