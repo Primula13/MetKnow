@@ -1,6 +1,6 @@
 import requests
 import json
-from Main.frames import models
+from frames import models
 from mimesis import Generic
 generic = Generic('en')
 
@@ -34,4 +34,3 @@ def create_members_in_group():
         r = requests.put(url="http://metknow.dev.cleveroad.com/api/Member/76/CreateMember", headers=auth,
                          data=json.dumps(payload))
         return r.status_code, r.json()
-
