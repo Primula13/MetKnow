@@ -19,7 +19,7 @@ def create_groups():
 def create_members_in_group():
     auth = {
         "Content-Type": "application/json",
-        "Authorization": models.user1.token
+        "Authorization": "Bearer " + models.user1.token
         }
     for _ in range(60):
         payload = {
@@ -31,6 +31,6 @@ def create_members_in_group():
             "city": generic.address.city(),
             "company": generic.business.company()
         }
-        r = requests.put(url="http://metknow.dev.cleveroad.com/api/Member/76/CreateMember", headers=auth,
+        r = requests.put(url="http://metknow.dev.cleveroad.com/api/Member/159/CreateMember", headers=auth,
                          data=json.dumps(payload))
-        return r.status_code, r.json()
+    return r.status_code, r.json()

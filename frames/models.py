@@ -20,3 +20,4 @@ class User(object):
 
 user1 = User("test3@gmail.com", "qwerty")
 admin = User("will@metknow.com", "metknow1901")
+user2 = User("test1@gmail.com", "qwerty")

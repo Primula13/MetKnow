@@ -14,3 +14,10 @@ def get_users_list(token):
               "Authorization": "Bearer " + token}
     r = requests.post(url=uri + "User/GetAll", headers=header, params={"Length": 12})
     return r.status_code, r.json()
+
+
+def register_user(email, password, confirm_password):
+    header = {"Content-Type": "application/json"}
+    payload = {"email": email, "password": password, "confirmPassword": confirm_password}
+    r = requests.post(url=uri + "Account/Register", headers=header, data=json.dumps(payload))
+    return r.status_code, r.json()
